@@ -2,6 +2,8 @@
 fixture-generator provides an easy way to generate fixtures for Go structs. It aims to reduce the time one spends writing tests.
 It works using a "best effort" approach - if we can't generate data for a field then ignore it and return a partally complete fixture.
 
+I do have more time to spend on this project so if you have suggestions or any kind of feedback I am more than happy to hear it and implement it as soon as possible.
+
 ### Installation
 
 `go get github.com/tiriplicamihai/fixture-generator/.../`, then `$GOPATH/bin/fixturegen`
