@@ -43,7 +43,7 @@ Fixtures can be generated even if field types are from other packages. It perfor
 
 * Fixtures can not be generated for fields declared as interfaces because we can't know the actual type
 * Fixtures can not be generated for a struct that has a self referencing field (we would go in an infinite loop)
-* Types from vendored external packages are not supported for know
+* Types from vendored external packages are not supported for now
 
 ### Credits
 
