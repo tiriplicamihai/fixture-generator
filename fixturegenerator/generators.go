@@ -5,6 +5,7 @@ import (
 	"go/ast"
 	"math/rand"
 	"os"
+	"path/filepath"
 )
 
 const (
@@ -232,10 +233,22 @@ func getTypeName(goType ast.Expr) (string, error) {
 	return "", fmt.Errorf("Can not generate type name")
 }
 
+
 func getPackagePath(path string) string {
 	// TODO(Mihai): Add support for multiple paths and for vendoring.
 	goPath := os.Getenv("GOPATH")
-	return fmt.Sprintf("%s/src/%s", goPath, path)
+	wildPath := fmt.Sprintf(`%s/pkg/mod/%s*`, goPath, path)
+	s, _ := filepath.Glob(wildPath)
+	if len(s) != 0 {
+		return s[len(s)-1] // latest version for now
+	}
+	goRoot := os.Getenv("GOROOT")
+	wildPath = fmt.Sprintf(`%s/src/%s*`, goRoot, path)
+	s, _ = filepath.Glob(wildPath)
+	if len(s) != 0 {
+		return s[len(s)-1]
+	}
+	return fmt.Sprintf(`%s/src/%s*`, goPath, path)
 }
 
 func getTabs(indentation int) string {
